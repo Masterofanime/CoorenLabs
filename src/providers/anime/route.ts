@@ -11,6 +11,8 @@ const CORS_HEADERS = {
 };
 
 const animeRoutes = new Elysia({ prefix: "/anime" })
+  
+  // ─── Overview Endpoint ────────────────────────────────────────────────────────
   .get("/", () => ({
     service: "anime",
     description: "Unified anime API — provider-isolated route architecture",
@@ -28,8 +30,11 @@ const animeRoutes = new Elysia({ prefix: "/anime" })
       "GET /anime/search/:query           → search (query param: provider)",
       "GET /anime/latest                  → latest releases with all mappings (query param: provider)",
     ],
-  }))
+  }), {
+    detail: { tags: ['anime'], summary: 'API Overview & Supported Providers' }
+  })
 
+  // ─── Search Endpoint ──────────────────────────────────────────────────────────
   .get("/search/:query", async ({ params: { query }, query: qs }) => {
     const providerName = (qs?.provider as string) || "animepahe";
     if (!isValidAnimeProvider(providerName)) {
@@ -76,8 +81,11 @@ const animeRoutes = new Elysia({ prefix: "/anime" })
     }));
 
     return { [providerName]: { provider: providerName, results: enriched } };
+  }, {
+    detail: { tags: ['anime'], summary: 'Search Anime by Title' }
   })
 
+  // ─── Latest Endpoint ──────────────────────────────────────────────────────────
   .get("/latest", async ({ query: qs }) => {
     const providerName = (qs?.provider as string) || "animepahe";
     if (!isValidAnimeProvider(providerName)) {
@@ -125,8 +133,11 @@ const animeRoutes = new Elysia({ prefix: "/anime" })
     }));
 
     return { [providerName]: { provider: providerName, results: enriched } };
+  }, {
+    detail: { tags: ['anime'], summary: 'Get Latest Anime Releases' }
   })
 
+  // ─── Metadata Endpoint ────────────────────────────────────────────────────────
   .get("/:id", async ({ params: { id }, query }) => {
     const resolved = await resolveId(id);
 
@@ -158,8 +169,11 @@ const animeRoutes = new Elysia({ prefix: "/anime" })
       episodeCount: resolved.fullData?.episodeCount ?? null,
       images: resolved.fullData?.images ?? [],
     };
+  }, {
+    detail: { tags: ['anime'], summary: 'Get Cross-Platform Metadata & Mappings' }
   })
 
+  // ─── Provider Info Endpoint ───────────────────────────────────────────────────
   .get("/:id/:provider", async ({ params: { id, provider: providerName } }) => {
     if (!isValidAnimeProvider(providerName)) {
       return { error: `Unknown provider '${providerName}'. Supported: ${SUPPORTED_ANIME_PROVIDERS.join(", ")}` };
@@ -181,8 +195,11 @@ const animeRoutes = new Elysia({ prefix: "/anime" })
     }
 
     return info;
+  }, {
+    detail: { tags: ['anime'], summary: 'Get Anime Info from Specific Provider' }
   })
 
+  // ─── Episodes List Endpoint ───────────────────────────────────────────────────
   .get("/:id/:provider/episodes", async ({ params: { id, provider: providerName } }) => {
     if (!isValidAnimeProvider(providerName)) {
       return { error: `Unknown provider '${providerName}'. Supported: ${SUPPORTED_ANIME_PROVIDERS.join(", ")}` };
@@ -210,8 +227,11 @@ const animeRoutes = new Elysia({ prefix: "/anime" })
       episodeCount: info.episodes.length,
       episodes: info.episodes,
     };
+  }, {
+    detail: { tags: ['anime'], summary: 'Get Episode List from Provider' }
   })
 
+  // ─── Streaming Links Endpoint ─────────────────────────────────────────────────
   .get("/:id/:provider/episode/:ep", async ({ params: { id, provider: providerName, ep } }) => {
     if (!isValidAnimeProvider(providerName)) {
       return { error: `Unknown provider '${providerName}'. Supported: ${SUPPORTED_ANIME_PROVIDERS.join(", ")}` };
@@ -254,6 +274,8 @@ const animeRoutes = new Elysia({ prefix: "/anime" })
         return rest;
       }),
     };
+  }, {
+    detail: { tags: ['anime'], summary: 'Get Streaming Links for Episode' }
   });
 
 export { animeRoutes };

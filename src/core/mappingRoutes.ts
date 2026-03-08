@@ -21,8 +21,11 @@ const mappingRoutes = new Elysia()
       return { error: "No mappings found for the given ID" };
     }
     return mappings;
-  })
-
-
+  }, {
+    detail: { 
+      tags: ['core'], 
+      summary: 'Get Cross-Platform ID Mappings (MAL, AniList, etc.)' 
+    }
+  });
 
 export { mappingRoutes };
