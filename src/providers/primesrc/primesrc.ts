@@ -2,12 +2,10 @@
 // currently supports  `Primevid` and `Streamtape` Server, 
 //TODO add other server extractors
 
-import { Cache } from "../../core/cache";
 import { fetcher } from "../../core/lib/fetcher";
 import { Logger } from "../../core/logger";
 import { USER_AGENT } from "../anime/animepahe/scraper";
-import { extractPrimevid } from "./extractors/primevid";
-import { extractStreamtape } from "./extractors/streamtape";
+import { extractDoodstream } from "./extractors/doodstream";
 import type { Response, ServerSource } from "./types";
 
 const origin = "https://primesrc.me"
@@ -60,10 +58,16 @@ export class Primesrc {
             }
 
             const serverSources: ServerSource[] = [];
-            const supportedServers = ["PrimeVid", "Streamtape"]  //TODO implement other servers
+            const supportedServers = [
+                // "PrimeVid",
+                // "Streamtape",
+                "Dood",
+                //-TODO implement other servers
+            ]
             const serversExtractors = {
-                "PrimeVid": extractPrimevid,
-                "Streamtape": extractStreamtape
+                // "PrimeVid": extractPrimevid,
+                // "Streamtape": extractStreamtape,
+                "Dood": extractDoodstream
             }
 
             for (const server of servers) {
@@ -109,43 +113,43 @@ export class Primesrc {
 
     }
     static async getMovieSource(tmdbid: number): Promise<Response<ServerSource[]>> {
-        const key = cachePrefix + "source:movie:" + tmdbid;
-        const cachedData = await Cache.get(key);
+        // const key = cachePrefix + "source:movie:" + tmdbid;
+        // const cachedData = await Cache.get(key);
 
-        if (cachedData) {
-            if (cachedData == "NOT_FOUND") {
-                return { success: false, status: 404 }
-            }
-            return { success: true, status: 200, data: JSON.parse(cachedData) };
-        }
+        // if (cachedData) {
+        //     if (cachedData == "NOT_FOUND") {
+        //         return { success: false, status: 404 }
+        //     }
+        //     return { success: true, status: 200, data: JSON.parse(cachedData) };
+        // }
 
         const data = await Primesrc.getSources("movie", tmdbid);
         if (data) {
-            Cache.set(key, JSON.stringify(data), PRIMESRC_CACHE_FOUND_TLL) // dont await
+            // Cache.set(key, JSON.stringify(data), PRIMESRC_CACHE_FOUND_TLL) // dont await
             return { success: true, status: 200, data }
         } else {
-            Cache.set(key, "NOT_FOUND", PRIMESRC_CACHE_NOT_FOUND_TLL) // dont await
+            // Cache.set(key, "NOT_FOUND", PRIMESRC_CACHE_NOT_FOUND_TLL) // dont await
             return { success: false, status: 404 }
         }
     }
     static async getTvSource(tmdbid: number, season: number, episode: number) {
-        const key = `${cachePrefix}:source:tv:${tmdbid}:${season}:${episode}`;
-        const cachedData = await Cache.get(key);
+        // const key = `${cachePrefix}:source:tv:${tmdbid}:${season}:${episode}`;
+        // const cachedData = await Cache.get(key);
 
-        if (cachedData) {
-            if (cachedData == "NOT_FOUND") {
-                return { success: false, status: 404 }
-            }
-            return { success: true, status: 200, data: JSON.parse(cachedData) };
-        }
+        // if (cachedData) {
+        //     if (cachedData == "NOT_FOUND") {
+        //         return { success: false, status: 404 }
+        //     }
+        //     return { success: true, status: 200, data: JSON.parse(cachedData) };
+        // }
 
         const data = await Primesrc.getSources("tv", tmdbid, season, episode);
 
         if (data) {
-            Cache.set(key, JSON.stringify(data), PRIMESRC_CACHE_FOUND_TLL) // dont await
+            // Cache.set(key, JSON.stringify(data), PRIMESRC_CACHE_FOUND_TLL) // dont await
             return { success: true, status: 200, data }
         } else {
-            Cache.set(key, "NOT_FOUND", PRIMESRC_CACHE_NOT_FOUND_TLL) // dont await
+            // Cache.set(key, "NOT_FOUND", PRIMESRC_CACHE_NOT_FOUND_TLL) // dont await
             return { success: false, status: 404 }
         }
     }
