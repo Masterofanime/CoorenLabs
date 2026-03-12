@@ -377,9 +377,9 @@ export const toonstreamRoutes = new Elysia({ prefix })
             const encodedUrl = encodeURIComponent(absoluteUrl);
 
             if (PLAYLIST_REGEX.test(absoluteUrl)) {
-              proxiedUrl = `${SERVER_ORIGIN}/m3u8-proxy?url=${encodedUrl}${headers ? `&headers=${encodedHeaders}` : ""}`;
+              proxiedUrl = `${SERVER_ORIGIN}${prefix}/m3u8-proxy?url=${encodedUrl}${headers ? `&headers=${encodedHeaders}` : ""}`;
             } else {
-              proxiedUrl = `${SERVER_ORIGIN}/fetch?url=${encodedUrl}${headers ? `&headers=${encodedHeaders}` : ""}`;
+              proxiedUrl = `${SERVER_ORIGIN}${prefix}/fetch?url=${encodedUrl}${headers ? `&headers=${encodedHeaders}` : ""}`;
             }
 
             return `URI="${proxiedUrl}"`;
@@ -390,9 +390,9 @@ export const toonstreamRoutes = new Elysia({ prefix })
         const encodedUrl = encodeURIComponent(absoluteUrl);
 
         if (PLAYLIST_REGEX.test(absoluteUrl)) {
-          return `${SERVER_ORIGIN}/m3u8-proxy?url=${encodedUrl}${headers ? `&headers=${encodedHeaders}` : ""}`;
+          return `${SERVER_ORIGIN}${prefix}/m3u8-proxy?url=${encodedUrl}${headers ? `&headers=${encodedHeaders}` : ""}`;
         } else {
-          return `${SERVER_ORIGIN}/ts-segment?url=${encodedUrl}${headers ? `&headers=${encodedHeaders}` : ""}`;
+          return `${SERVER_ORIGIN}${prefix}/ts-segment?url=${encodedUrl}${headers ? `&headers=${encodedHeaders}` : ""}`;
         }
       }).join("\n");
 
