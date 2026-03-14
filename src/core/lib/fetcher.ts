@@ -38,17 +38,18 @@ export const fetcher = async (input: string, detectCfCapcha: boolean, cachePrefi
     const res = await fetch(input, init);
     const status = res.status;
 
+    const text = await res.text();
+
     if (!res.ok) {
       Logger.warn(`[${cachePrefix}] Failed to fetch url:`, input, "\n", "Status:", status);
 
       if (detectCfCapcha && cf_captcha_status.includes(status)) {
-        const text = await res.text();
         if (!cf_signatures.some(sig => text.includes(sig))) {
           Logger.info("CF capcha not detected!")
           return;
         }  // return if doesnt match to any cf capcha signatures
 
-        Logger.info("[${cachePrefix}] Detected CF Capcha");
+        Logger.info(`[${cachePrefix}] Detected CF Capcha`);
 
         for (let i = 1; i <= CF_BYPASS_MAX_TRY; ++i) {
           Logger.info(`[${cachePrefix}] Bypasinng CF Capcha- Try ${i}/${CF_BYPASS_MAX_TRY}`);
@@ -81,8 +82,6 @@ export const fetcher = async (input: string, detectCfCapcha: boolean, cachePrefi
 
       }
     }
-
-    const text = await res.text();
 
     return { success: true, status, text };
 
