@@ -117,7 +117,7 @@ export class Primesrc {
       }
 
       return serverSources;
-    } catch (_err) {
+    } catch (err) {
       Logger.error("[primesrc]", "Error occured", err);
     }
   }

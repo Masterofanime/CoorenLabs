@@ -129,7 +129,7 @@ export const extractDoodstream = async (url: string) => {
       subtitles: [],
     };
     return finalData;
-  } catch (_err) {
+  } catch (err) {
     Logger.error("[streamtape] Error occured:", err);
   }
 };

@@ -41,7 +41,7 @@ export async function ScrapeMovies(page: number = 1) {
 
     const pagination = { current, start, end };
     return { pagination, data };
-  } catch (_err) {
+  } catch (err) {
     console.log("ERROR", err);
   }
 }
@@ -142,7 +142,7 @@ export async function ScrapeMovieInfo(slug: string) {
       tags,
       casts,
     };
-  } catch (_err) {
+  } catch (err) {
     console.log("ERROR", err);
   }
 }
@@ -183,7 +183,7 @@ export async function ScrapeMovieSources(slug: string) {
       embeds: playerIframeUrls,
       sources: directSources,
     };
-  } catch (_err) {
+  } catch (err) {
     console.log("ERROR", err);
   }
 }

@@ -61,7 +61,7 @@ export class VidfastParser {
         url: sub.url,
         format: sub.format || "srt",
       }));
-    } catch (_err) {
+    } catch (err) {
       return [];
     }
   }
@@ -77,7 +77,7 @@ export class VidfastParser {
         return data.meta.imdb_id;
       }
       return null;
-    } catch (_e) {
+    } catch (e) {
       return null;
     }
   }
@@ -192,7 +192,7 @@ export class VidfastParser {
                   `[Vidfast] Intercepted Server List: ${expectedServerCount} servers available.`,
                 );
               }
-            } catch (_e) {}
+            } catch (e) {}
           }
         });
 
@@ -304,7 +304,7 @@ export class VidfastParser {
                 }
               }, serverList)
               .catch(() => {});
-          } catch (_e) {}
+          } catch (e) {}
         }, 1500);
       });
 

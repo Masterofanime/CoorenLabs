@@ -176,7 +176,7 @@ export async function resolveId(rawId: string): Promise<ResolvedAnime | null> {
       titles: fullData.titles,
       fullData,
     };
-  } catch (_err) {
+  } catch (err) {
     Logger.error(`ID resolution error for ${rawId}: ${String(err)}`);
     return {
       parsedId: parsed,

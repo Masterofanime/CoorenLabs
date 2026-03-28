@@ -75,7 +75,7 @@ export async function getAsCdnSource(
       headers: corsHeaders,
       proxiedUrl: proxifyUrl(streamUrl, type, corsHeaders),
     };
-  } catch (_err) {
+  } catch (err) {
     console.log("[Error]", err);
   }
 }

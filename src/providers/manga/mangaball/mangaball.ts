@@ -244,7 +244,7 @@ export class MangaballParser {
           }
         }
       }
-      const msg = _err instanceof Error ? _err.message : String(_err);
+      const msg = err instanceof Error ? err.message : String(err);
       return { error: msg };
     }
   }
@@ -300,7 +300,7 @@ export class MangaballParser {
           }
         }
       }
-      const msg = _err instanceof Error ? _err.message : String(_err);
+      const msg = err instanceof Error ? err.message : String(err);
       return { error: msg };
     }
   }
@@ -802,8 +802,8 @@ export class MangaballParser {
       const raw = resp.data as Record<string, unknown>;
       if ("error" in raw) return raw;
       return this.transformTagsDetail(raw);
-    } catch (_err) {
-      const msg = _err instanceof Error ? _err.message : String(_err);
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : String(err);
       return { error: msg };
     }
   }

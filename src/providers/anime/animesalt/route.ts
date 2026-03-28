@@ -158,8 +158,8 @@ export const animesaltRoutes = new Elysia({ prefix: "/animesalt" })
           .join("\n");
 
         return new Response(proxified);
-      } catch (_err) {
-        Logger.error(_err);
+      } catch (err) {
+        Logger.error(err);
         return new Response("Proxy error", { status: 500 });
       }
     },
@@ -197,8 +197,8 @@ export const animesaltRoutes = new Elysia({ prefix: "/animesalt" })
             "Content-Type": "video/MP2T",
           },
         });
-      } catch (_err) {
-        Logger.error(_err);
+      } catch (err) {
+        Logger.error(err);
         return new Response("Proxy error", { status: 500 });
       }
     },

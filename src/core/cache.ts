@@ -8,7 +8,7 @@ import { Logger } from "./logger";
 // We can't import RedisClient from "bun" in non-Bun runtimes.
 let RedisClientValue: any;
 if (isBun) {
-  // @ts-expect-error - Bun global
+  
   import("bun").then((m) => (RedisClientValue = m.RedisClient));
 }
 
@@ -51,7 +51,7 @@ else if (CACHE_PROVIDER == "default") {
 
     // Use dynamic import or handle via variable
     // Since we already checked isBun, we can assume it's available.
-    // @ts-expect-error - Bun global
+    
     import("bun")
       .then(({ RedisClient }) => {
         redis = new RedisClient(REDIS_URL, {
@@ -111,7 +111,7 @@ export class Cache {
         `[Cache] successfully saved cache, key:${key}, ttl:${TTL == -1 ? "forever" : TTL + "seconds"} `,
       );
       return true;
-    } catch (_err) {
+    } catch (err) {
       Logger.error(
         `[Cache] failed to saved cache, key:${key}, ttl:${TTL == -1 ? "forever" : TTL + "seconds"} `,
       );
@@ -134,7 +134,7 @@ export class Cache {
       else Logger.info(`[Cache] HIT, key:${key}`);
 
       return data;
-    } catch (_error) {
+    } catch (error) {
       Logger.error(`[Cache] FAULT, key:${key} -`, error);
       return null;
     }
@@ -153,7 +153,7 @@ export class Cache {
 
       Logger.info(`[Cache] DELETE, key:${key}`);
       return true;
-    } catch (_error) {
+    } catch (error) {
       Logger.error(`[Cache] FAULT, key:${key} -`, error);
       return false;
     }
@@ -191,7 +191,7 @@ export class Cache {
       } while (cursor !== "0");
 
       return totalDeleted;
-    } catch (_error) {
+    } catch (error) {
       Logger.error(`[Cache] FAULT, purge prefix:${prefix} -`, error);
       return false;
     }
@@ -215,7 +215,7 @@ export class Cache {
       }
       Logger.info(`[Cache] Purged ${count} records`);
       return count;
-    } catch (_error) {
+    } catch (error) {
       Logger.error(`[Cache] FAULT, purge all -`, error);
       return false;
     }

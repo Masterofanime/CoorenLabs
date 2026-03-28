@@ -84,7 +84,7 @@ export async function getAsCdnSource(
       headers: corsHeaders,
       proxiedUrl: proxifyUrl(streamUrl, type, corsHeaders),
     }; // fuck typescript, fuck microsoft
-  } catch (_err) {
+  } catch (err) {
     console.log("[Error]", err);
   }
 }

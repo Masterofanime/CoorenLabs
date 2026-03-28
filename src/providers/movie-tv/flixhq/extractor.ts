@@ -63,8 +63,8 @@ export class VidCloud {
     let result: string;
     try {
       result = Buffer.from(encrypted, "base64").toString("utf8");
-    } catch (_error: any) {
-      throw new Error(`Base64 decoding failed: ${_error.message}`, { cause: _error });
+    } catch (error: any) {
+      throw new Error(`Base64 decoding failed: ${error.message}`, { cause: error });
     }
     const keyphrase = secret + nonce;
     for (let i = 1; i <= iterations; i++) {
@@ -121,7 +121,7 @@ export class VidCloud {
       try {
         clientKey = await getClientKey(videoUrl.href, referer);
         if (clientKey) break;
-      } catch (_e) {
+      } catch (e) {
         await new Promise((r) => setTimeout(r, Math.pow(2, attempt) * 1000));
       }
     }

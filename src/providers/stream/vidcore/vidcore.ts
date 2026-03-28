@@ -62,7 +62,7 @@ export class VidcoreParser {
         url: sub.url,
         format: sub.format || "srt",
       }));
-    } catch (_err) {
+    } catch (err) {
       return [];
     }
   }
@@ -114,7 +114,7 @@ export class VidcoreParser {
                 }
               }
             }
-          } catch (_e) {}
+          } catch (e) {}
           return parsed;
         };
       });
@@ -171,7 +171,7 @@ export class VidcoreParser {
                   `[Vidcore] Intercepted Server List: ${expectedServerCount} servers available.`,
                 );
               }
-            } catch (_e) {}
+            } catch (e) {}
           }
 
           // Catch .vtt files returning directly via network
@@ -341,7 +341,7 @@ export class VidcoreParser {
                 }
               }, serverList)
               .catch(() => {});
-          } catch (_e) {}
+          } catch (e) {}
         }, 1500);
       });
 

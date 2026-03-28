@@ -110,7 +110,7 @@ export const extractPrimevid = async (url: string) => {
     }
 
     return { sources, subtitles };
-  } catch (_err) {
+  } catch (err) {
     Logger.error("[Primevid] error occured while fetching", err);
   }
 };
@@ -131,7 +131,7 @@ const decryptCipher = (cipherBuffer: Buffer) => {
     // Logger.info(JSON.parse(data));
 
     return data;
-  } catch (_err) {
+  } catch (err) {
     Logger.error("[primevid] error occured while decrypting cipher:", err);
   }
 };

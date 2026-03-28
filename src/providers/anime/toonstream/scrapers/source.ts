@@ -21,7 +21,7 @@ export async function getPlayerIframeUrls(toonStreamIframeUrls: string[]) {
       if (!iframeUrl) continue;
 
       playerIframeUrls.push(iframeUrl);
-    } catch (_err) {
+    } catch (err) {
       console.log("Error:", err);
     }
   }
@@ -64,7 +64,7 @@ export async function getDirectSources(playerIframeUrls: string[]) {
           }
         }
       } else console.log("No source-scraper found for", url, "- skipping");
-    } catch (_err) {
+    } catch (err) {
       console.log("Error:", err);
     }
   }

@@ -81,8 +81,8 @@ export class Animepahe {
         fansub: item.fansub,
         created_at: item.created_at,
       }));
-    } catch (_err) {
-      Logger.error(`AnimePahe latest error: ${String(_err)}`);
+    } catch (err) {
+      Logger.error(`AnimePahe latest error: ${String(err)}`);
       return [];
     }
   }
@@ -153,8 +153,8 @@ export class Animepahe {
         genres,
         externalLinks,
       };
-    } catch (_err) {
-      Logger.error(`AnimePahe info error: ${String(_err)}`);
+    } catch (err) {
+      Logger.error(`AnimePahe info error: ${String(err)}`);
       return null;
     }
   }
@@ -213,13 +213,13 @@ export class Animepahe {
               downloadUrl,
               corsHeaders,
             };
-          } catch (_err) {
-            Logger.error(`Error extracting stream for ${quality}p ${audio}: ${String(_err)}`);
+          } catch (err) {
+            Logger.error(`Error extracting stream for ${quality}p ${audio}: ${String(err)}`);
           }
         }
       }
-    } catch (_err) {
-      Logger.error(`AnimePahe streams error: ${String(_err)}`);
+    } catch (err) {
+      Logger.error(`AnimePahe streams error: ${String(err)}`);
     }
   }
 
@@ -234,7 +234,7 @@ export class Animepahe {
       const $ = cheerio.load(html);
 
       return $('span[style="user-select:text"]').text().trim() || "Anime";
-    } catch (_err) {
+    } catch (err) {
       Logger.error(`Failed to get name for anime ${id}:`, err);
       return "Anime";
     }
@@ -280,8 +280,8 @@ export class Animepahe {
 
       episodes.sort((a, b) => a.episode - b.episode);
       return episodes;
-    } catch (_err) {
-      Logger.error(`AnimePahe fetchAllEpisodes error: ${String(_err)}`);
+    } catch (err) {
+      Logger.error(`AnimePahe fetchAllEpisodes error: ${String(err)}`);
       return [];
     }
   }
@@ -460,7 +460,7 @@ export class Animepahe {
       }
 
       return urlObj.toString();
-    } catch (_e) {
+    } catch (e) {
       // Fallback for simple replacement if URL object fails
       return m3u8Url
         .replace(".uwucdn.top", ".kwik.cx")

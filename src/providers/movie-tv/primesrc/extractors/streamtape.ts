@@ -100,7 +100,7 @@ export const extractStreamtape = async (url: string) => {
 
       return { sources: [source], subtitles: [] };
     }
-  } catch (_err) {
+  } catch (err) {
     Logger.error("[streamtape] Error occured:", err);
   }
 };

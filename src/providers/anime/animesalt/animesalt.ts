@@ -44,8 +44,8 @@ export class AnimeSalt {
       const result = { lastEpisodes };
       Cache.set(key, JSON.stringify(result), 43200);
       return result;
-    } catch (_err) {
-      Logger.error(_err);
+    } catch (err) {
+      Logger.error(err);
       return null;
     }
   }
@@ -85,8 +85,8 @@ export class AnimeSalt {
       const result = { data };
       Cache.set(key, JSON.stringify(result), 43200);
       return result;
-    } catch (_err) {
-      Logger.error(_err);
+    } catch (err) {
+      Logger.error(err);
       return null;
     }
   }
@@ -136,8 +136,8 @@ export class AnimeSalt {
 
       Cache.set(key, JSON.stringify(result), 604800);
       return result;
-    } catch (_err) {
-      Logger.error(_err);
+    } catch (err) {
+      Logger.error(err);
       return null;
     }
   }
@@ -173,8 +173,8 @@ export class AnimeSalt {
       const result = { data };
       Cache.set(key, JSON.stringify(result), 2592000);
       return result;
-    } catch (_err) {
-      Logger.error(_err);
+    } catch (err) {
+      Logger.error(err);
       return null;
     }
   }
@@ -209,8 +209,8 @@ export class AnimeSalt {
         downloadLinks,
         ...sources,
       };
-    } catch (_err) {
-      Logger.error(_err);
+    } catch (err) {
+      Logger.error(err);
       return null;
     }
   }
@@ -227,8 +227,8 @@ export class AnimeSalt {
       const seasons = postId ? await this.getSeasons(postId) : [];
 
       return { title, seasons };
-    } catch (_err) {
-      Logger.error(_err);
+    } catch (err) {
+      Logger.error(err);
       return null;
     }
   }
@@ -259,8 +259,8 @@ export class AnimeSalt {
           };
         } catch {}
       }
-    } catch (_err) {
-      Logger.error(_err);
+    } catch (err) {
+      Logger.error(err);
     }
   }
 

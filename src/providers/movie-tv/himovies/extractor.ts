@@ -60,8 +60,8 @@ export async function getClientKey(embedUrl: string, referer: string): Promise<s
       if (uniqueSalts.length > 0) {
         return uniqueSalts[0];
       }
-    } catch (_error) {
-      console.error("getClientKey error:", _error);
+    } catch (error) {
+      console.error("getClientKey error:", error);
     }
   }
   return "";
@@ -144,8 +144,8 @@ export class VideoStream {
         }
       }
       throw new Error(`Invalid 'vidstr' field or key not found in JSON from ${url}.`);
-    } catch (_error) {
-      throw new Error(`Failed to fetch key from ${url}: ${_error}`, { cause: _error });
+    } catch (error) {
+      throw new Error(`Failed to fetch key from ${url}: ${error}`, { cause: error });
     }
   }
 
@@ -194,8 +194,8 @@ export class VideoStream {
         if (clientKey) {
           break;
         }
-      } catch (_error) {
-        console.error(`Attempt ${attempt + 1} failed to fetch ClientKey: ${_error}`);
+      } catch (error) {
+        console.error(`Attempt ${attempt + 1} failed to fetch ClientKey: ${error}`);
       }
       if (attempt < MAX_RETRIES - 1) {
         const delay = Math.pow(2, attempt) * 1000;
@@ -278,8 +278,8 @@ export class VideoStream {
         }));
       }
       return extractedData;
-    } catch (_error: any) {
-      throw new Error(_error.message, { cause: _error });
+    } catch (error: any) {
+      throw new Error(error.message, { cause: error });
     }
   }
 }

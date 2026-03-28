@@ -109,7 +109,7 @@ export async function ScrapeHomePage() {
       sidebar: sidebarSections,
       lastEpisodes,
     };
-  } catch (_err) {
+  } catch (err) {
     console.log("Error", err);
   }
 }

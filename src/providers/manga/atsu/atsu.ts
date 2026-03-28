@@ -61,7 +61,7 @@ export class AtsuParser {
         if (data && Array.isArray(data.items) && data.items.length > 0) {
           return data;
         }
-      } catch (_err) {
+      } catch (err) {
         // Ignore network errors during polling, we will just try again
       }
 
@@ -130,7 +130,7 @@ export class AtsuParser {
             `/api/manga/allChapters?mangaId=${encodeURIComponent(id)}`,
           );
           if (allChapsRes.data?.chapters) chapters = allChapsRes.data.chapters;
-        } catch (_e) {
+        } catch (e) {
           console.error("Failed to fetch all chapters, falling back to partial list.");
         }
       }

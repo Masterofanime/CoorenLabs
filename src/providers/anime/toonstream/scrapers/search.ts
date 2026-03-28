@@ -40,7 +40,7 @@ export async function ScrapeSearch(query: string, page: number = 1) {
 
     const pagination = { current, start, end };
     return { query, pagination, data };
-  } catch (_err) {
+  } catch (err) {
     console.log("ERROR", err);
   }
 }

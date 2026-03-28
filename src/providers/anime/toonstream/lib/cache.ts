@@ -55,7 +55,7 @@ export class Cache {
         console.log(`[Cache] Serving from cache, key: "${key}"`);
         return JSON.parse(rawData);
       } else return rawData;
-    } catch (_error) {
+    } catch (error) {
       console.error(`[Cache] GET Error for key: "${key}":`, error);
       return null;
     }
@@ -95,7 +95,7 @@ export class Cache {
         console.log(`[Cache] Successfully set key: "${key}"`);
         return true;
       } else return false;
-    } catch (_error) {
+    } catch (error) {
       console.error(`[Cache] SET Error for key: "${key}":`, error);
       return null;
     }
@@ -109,7 +109,7 @@ export class Cache {
         console.log(`[Cache] Purging ${keys.length} keys...`);
         return await redis.del(...keys);
       }
-    } catch (_error) {
+    } catch (error) {
       console.error(`[Cache] Purge cache Error:`, error);
       return null;
     }
@@ -120,7 +120,7 @@ export class Cache {
     try {
       console.log(`[Cache] deleting cache key: ${key}`);
       return await redis.del(key);
-    } catch (_error) {
+    } catch (error) {
       console.error(`[Cache] delete cache Error:`, error);
       return null;
     }

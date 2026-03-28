@@ -96,7 +96,7 @@ export async function getCloudflareClearance(targetUrl: string): Promise<Clearan
             let userAgent = "";
             try {
               userAgent = await pageInstance.evaluate((): string => navigator.userAgent);
-            } catch (_err) {
+            } catch (err) {
               return;
             }
 
@@ -117,7 +117,7 @@ export async function getCloudflareClearance(targetUrl: string): Promise<Clearan
               ttl: ttlSeconds,
             });
           }
-        } catch (_err) {
+        } catch (err) {
           // Suppress rapid-reload context errors
         }
       }, 50);
@@ -132,7 +132,7 @@ export async function getCloudflareClearance(targetUrl: string): Promise<Clearan
       ttl: extractionData.ttl,
       allCookies: extractionData.cookies,
     };
-  } catch (_error) {
+  } catch (error) {
     const errorMessage = error instanceof Error ? error.message : "Unknown error occurred";
     console.error("Failed to bypass:", errorMessage);
     return { success: false, error: errorMessage };
