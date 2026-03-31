@@ -1,9 +1,9 @@
 /**
  * MangaFire VRF generation.
- * 
+ *
  * Ported and adapted from:
  * https://github.com/m2k3a/mangayomi-extensions/blob/main/javascript/manga/src/all/mangafire.js (Apache-2.0)
- * 
+ *
  * Original Credits:
  * https://github.com/keiyoushi/extensions-source/pull/10988
  */
